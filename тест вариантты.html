@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по площади трапеции</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .question { margin-bottom: 15px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Тест по площади трапеции</h1>
+    <form id="quizForm">
+        <label for="studentName">Введите ваше имя:</label>
+        <input type="text" id="studentName" required><br><br>
+        
+        <div class="question">
+            <p>1. Какая формула площади трапеции является правильной?</p>
+            <input type="radio" name="q1" value="wrong"> S= a * h<br>
+            <input type="radio" name="q1" value="correct"> S = 1/2 *(a + b) * h<br>
+            <input type="radio" name="q1" value="wrong"> S = 1/2 * a * b<br>
+            <input type="radio" name="q1" value="wrong"> S= a * b
+        </div>
+        <div class="question">
+            <p>2. Что равно площади трапеции при высоте 0?</p>
+            <input type="radio" name="q2" value="correct"> Невозможно посчитать<br>
+            <input type="radio" name="q2" value="wrong"> Значению основания<br>
+            <input type="radio" name="q2" value="wrong"> Половине основания
+        </div>
+        <div class="question">
+            <p>3. У какой фигуры можно применять формулу площади трапеции?</p>
+            <input type="radio" name="q3" value="correct"> Для любой трапеции<br>
+            <input type="radio" name="q3" value="wrong"> Для любого четырёхугольника<br>
+            <input type="radio" name="q3" value="wrong"> Для прямоугольника<br>
+            <input type="radio" name="q3" value="wrong"> Для параллелограмма
+        </div>
+        <div class="question">
+            <p>4. Как связаны основания и высота в формуле площади трапеции?</p>
+            <input type="radio" name="q4" value="wrong"> Основания делятся, высота складывается<br>
+            <input type="radio" name="q4" value="wrong"> Основания вычитаются, высота умножается<br>
+            <input type="radio" name="q4" value="correct"> Основания складываются, высота умножается<br>
+            <input type="radio" name="q4" value="wrong"> Основания умножаются, высота делится
+        </div>
+        <div class="question">
+            <p>5. Чему равно основание трапеции, если её площадь и высота известны?</p>
+            <input type="radio" name="q5" value="correct"> S/h<br>
+            <input type="radio" name="q5" value="wrong"> Найти невозможно<br>
+            <input type="radio" name="q5" value="wrong"> h*Sv<br>
+            <input type="radio" name="q5" value="wrong"> Зависит от второго основания
+        </div>
+        <div class="question">
+            <p>6. Если площадь трапеции равна 40 см², основания 6 см и 10 см, какова её высота?</p>
+            <input type="radio" name="q6" value="wrong"> Высота равна 16CM<br>
+            <input type="radio" name="q6" value="wrong"> Высота равна 8CM<br>
+            <input type="radio" name="q6" value="correct"> Высота равна 4CM<br>
+            <input type="radio" name="q6" value="wrong"> Высота равна 10 см
+        </div>
+        <div class="question">
+            <p>7. Что обозначает 'h' в формуле площади трапеции?</p>
+            <input type="radio" name="q7" value="wrong"> Диагональ трапеции<br>
+            <input type="radio" name="q7" value="correct"> Высоту трапеции<br>
+            <input type="radio" name="q7" value="wrong"> Основание трапеции<br>
+            <input type="radio" name="q7" value="wrong"> Боковую сторону трапеции
+        </div>
+        <div class="question">
+            <p>8. Как найти среднее арифметическое двух оснований трапеции?</p>
+            <input type="radio" name="q8" value="wrong"> ab + h<br>
+            <input type="radio" name="q8" value="correct"> (a + b) / 2<br>
+            <input type="radio" name="q8" value="wrong"> a + b<br>
+            <input type="radio" name="q8" value="wrong"> (a + b) * h
+        </div>
+        <button type="button" onclick="checkAnswers()">Проверить ответы</button>
+    </form>
+    <div id="results"></div>
+    <script>
+        function checkAnswers() {
+            const studentName = document.getElementById('studentName').value.trim();
+            if (!studentName) {
+                alert('Пожалуйста, введите ваше имя.');
+                return;
+            }
+            
+            const form = document.getElementById('quizForm');
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            
+            let correctCount = 0;
+            let totalQuestions = 2;
+            
+            Array.from(form.elements).forEach(input => {
+                if (input.type === 'radio' && input.checked) {
+                    let parentP = input.closest('.question').querySelector('p');
+                    if (input.value === 'correct') {
+                        correctCount++;
+                        parentP.classList.add('correct');
+                    } else {
+                        parentP.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            const resultsText = `${studentName}, вы ответили правильно на ${correctCount} из ${totalQuestions} вопросов.`;
+            resultsDiv.innerHTML = `<p>${resultsText}</p>`;
+            
+            const phoneNumber = "87023007931";
+            const message = encodeURIComponent(resultsText);
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
+
